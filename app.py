@@ -5,11 +5,7 @@ st.set_page_config(page_title="Overview", layout="wide")
 
 st.title('Project Objective')
 
-name = st.text_input('Enter your name:')
-st.write(f'Hello, {name}!')
 
-interest = st.slider('Select your Interest:', 0, 100, 25)
-st.write(f'You have {interest} interest level of this project.')
 
 st.write("""
 This project analyzes daily air quality data collected from major Indian cities between 2015 and 2020. The dataset includes key pollutants such as PM2.5, PM10, NO, NO2, NOx, NH3, CO, SO2, O3, and VOCs (Benzene, Toluene, Xylene), as well as the Air Quality Index (AQI) and categorized AQI_Bucket. These measurements help describe pollution levels, seasonal patterns, and overall environmental conditions across different regions in India.
