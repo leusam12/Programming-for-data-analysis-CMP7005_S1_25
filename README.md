@@ -22,25 +22,27 @@ Use GitHub for version control and documentation.
 
 # Requirements
 
-pandas
+import pandas as pd
 
-numpy
+import os
 
-matplotlib
+from glob import glob
 
-seaborn
+import numpy as np
 
-plotly
+import matplotlib.pyplot as plt
 
-streamlit
+import seaborn as sns
+
+import plotly.express as px
+
+import plotly.graph_objects as go
+
+import streamlit
 
 scikit-learn
 
-os
-
-glob
-
-drive
+from google.colab import drive
 
 # Project Objectives
 Clean and preprocess the raw dataset.
@@ -294,6 +296,16 @@ Confusion matrix
 Feature importance plot
 
 Prediction interface for user inputs
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/e6209449-e5e9-46cd-b62a-9cc4d654dc4a" />
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/50847304-b2c3-4fb6-a9af-ead5dbb775e9" />
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/0e33e8ee-8419-41c2-833c-595a7bc5f08a" />
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/83d3f7cd-2597-40d0-a661-de9d7d541603" />
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/1bab6863-21b0-4861-a9b3-37c65cb87711" />
 
 # Project Structure
 Air-Quality-Project/
