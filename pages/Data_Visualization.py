@@ -151,3 +151,24 @@ fig = px.scatter(
 )
 
 st.plotly_chart(fig, use_container_width=True) 
+
+st.subheader("Average concentration of pollutants")
+
+
+pollutants = ['PM2.5', 'PM10', 'NO', 'NO2', 'NOx', 'NH3', 'CO', 'SO2', 'O3', 'Benzene', 'Toluene', 'Xylene']
+
+
+pollutant_means = df_engineered[pollutants].mean().reset_index()
+pollutant_means.columns = ["Pollutant", "Average"]
+
+
+fig = px.bar(
+    pollutant_means, 
+    x="Pollutant",
+    y="Average",
+    title="Average Concentration of Each Pollutant",
+    template="plotly_white",
+    color="Pollutant"
+)
+
+st.plotly_chart(fig, use_container_width=True) 
