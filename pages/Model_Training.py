@@ -24,8 +24,7 @@ st.title('Model Training and Evaluation')
 
 st.sidebar.success("Welcome to the Machine Learning Page")
 
-# --- Define Local Folder Path (Same as cleaning page) ---
-folder_path = "C:\\Users\\Jide\\Desktop\\akestreamlit\\Assessment Data-20251028\\"
+folder_path = "Assessment Data-20251028"
 
 # --- Function to load, clean, AND engineer data (copied for independence) ---
 @st.cache_data
