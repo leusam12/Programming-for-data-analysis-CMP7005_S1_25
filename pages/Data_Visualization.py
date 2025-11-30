@@ -218,3 +218,21 @@ fig = px.sunburst(
 
 
 st.plotly_chart(fig, use_container_width=True)
+
+
+
+st.subheader("Monthly PM2.5 average trend")
+
+
+monthly_avg = df_engineered.groupby('Month')['PM2.5'].mean().reset_index()
+
+fig = px.line(
+    monthly_avg,
+    x='Month',
+    y='PM2.5',
+    title="Average PM2.5 Levels by Month",
+    markers=True,
+    template="plotly_white"
+)
+
+st.plotly_chart(fig, use_container_width=True)
