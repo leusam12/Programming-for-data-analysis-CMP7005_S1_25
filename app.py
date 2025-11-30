@@ -21,14 +21,11 @@ The heatmap shows which columns contain missing values and how they are distribu
 """)
 
 image_path_1 = os.path.join("images", "opk.png")
-image_path_2 = os.path.join("images", "Screenshot.png")
+
 
 if os.path.exists(image_path_1):
     st.image(image_path_1, caption="Correlation heatmap", use_column_width=True)
 else:
     st.warning(f"Image not found at path: {image_path_1}")
 
-if os.path.exists(image_path_2):
-    st.image(image_path_2, caption="Team Connect", use_column_width=True)
-else:
-    st.warning(f"Image not found at path: {image_path_2}")
+
