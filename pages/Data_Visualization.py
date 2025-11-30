@@ -172,3 +172,49 @@ fig = px.bar(
 )
 
 st.plotly_chart(fig, use_container_width=True) 
+
+
+st.subheader("Correlation heatmap for key pollutants (MULTIVARIATE ANALYSIS)")
+
+pollutants = ['PM2.5','PM10','NO','NO2','NOx','NH3','CO','SO2','O3',
+              'Benzene','Toluene','Xylene']
+
+
+corr_matrix = df_engineered[pollutants].corr()
+
+
+fig = go.Figure(
+    data=go.Heatmap(
+        z=corr_matrix.values,
+        x=corr_matrix.columns,
+        y=corr_matrix.index,
+        colorscale="RdBu",
+        zmin=-1,
+        zmax=1
+    )
+)
+
+fig.update_layout(
+    title="Correlation Heatmap of Pollutants",
+    template="plotly_white"
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+
+
+st.subheader("AQI distribution by season and city")
+
+
+aqi_sunburst = df_engineered.groupby(["Season", "City"])["AQI"].mean().reset_index()
+
+
+fig = px.sunburst(
+    aqi_sunburst,
+    path=["Season", "City"],
+    values="AQI",
+    title="AQI Distribution by Season and City"
+)
+
+
+st.plotly_chart(fig, use_container_width=True)
