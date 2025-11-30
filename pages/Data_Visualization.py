@@ -136,3 +136,18 @@ fig_aqi = px.bar(
 )
 
 st.plotly_chart(fig_aqi, use_container_width=True)
+
+st.subheader("PM2.5 vs AQI Relationship")
+
+
+fig = px.scatter(
+    df_engineered,  
+    x="PM2.5",
+    y="AQI",
+    opacity=0.5,
+    title="PM2.5 vs AQI Relationship",
+    template="plotly_white",
+    trendline="ols"
+)
+
+st.plotly_chart(fig, use_container_width=True) 
