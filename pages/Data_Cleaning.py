@@ -167,3 +167,30 @@ else:
 
 st.markdown('---') 
 
+# Create two columns for the text areas and buttons
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader('Upload Cleaning Notes ')
+   
+    text_area_1 = st.text_area("Enter notes for Upload Data Cleaning :", height=200, key="ta1")
+    
+    if st.button('Publish Notes', key="btn1"):
+        if text_area_1:
+            st.info(f"Step 1 applied with input: {text_area_1[:50]}...")
+        else:
+            st.warning("Please enter text for Step 1.")
+
+with col2:
+    st.subheader('Fixed Cleaning Notes')
+
+    text_area_2 = st.text_area("Enter notes for Fixed Data Cleaning :", height=200, key="ta2")
+ 
+    if st.button('Publish Notes', key="btn2"):
+        if text_area_2:
+            st.info(f"Step 2 applied with input: {text_area_2[:50]}...")
+        else:
+            st.warning("Please enter text for Step 2.")
+
+
+
