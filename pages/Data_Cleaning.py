@@ -92,7 +92,7 @@ st.markdown('---')
 st.write('Reading files directly from a fixed local folder path.')
 
 
-folder_path = "https://github.com/Omotola2025/assessment/tree/main\\Assessment%20Data-20251028\\"
+folder_path = "https://github.com\\Omotola2025\\assessment\\tree/main\\Assessment%20Data-20251028\\"
 
 @st.cache_data
 def load_and_clean_data_from_folder(f_path):
