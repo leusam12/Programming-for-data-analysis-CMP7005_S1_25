@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 streamlit>=1.30
 pandas>=2.3
 numpy>=2.3
@@ -6,3 +7,17 @@ matplotlib>=3.8
 statsmodels
 scikit-learn>=1.3
 plotly>=5.15
+=======
+streamlit
+pandas
+numpy
+seaborn
+matplotlib
+statsmodels
+scikit-learn
+plotly
+
+
+
+
+>>>>>>> 111a26c9356f1acd25b1fceb18b5a01c6b800696

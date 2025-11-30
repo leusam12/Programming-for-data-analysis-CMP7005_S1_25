@@ -17,7 +17,7 @@ st.title('Data Visualization and Feature Engineering')
 st.sidebar.success("This Visualization will show the kind of techniques employed")
 
 
-folder_path = "C:\\Users\\Jide\\Desktop\\akestreamlit\\Assessment Data-20251028\\"
+folder_path = "Assessment Data-20251028"
 
 
 @st.cache_data

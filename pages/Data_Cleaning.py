@@ -88,55 +88,57 @@ else:
     st.info("Please upload your data files using the widget above.")
 
 st.markdown('---') 
-
 st.write('Reading files directly from a fixed local folder path.')
 
-
-folder_path = "C:\\Users\\Jide\\Desktop\\akestreamlit\\Assessment Data-20251028\\"
+# Correct relative path
+folder_path = "Assessment Data-20251028"
 
 @st.cache_data
 def load_and_clean_data_from_folder(f_path):
-    """Reads, merges, and cleans CSV files from a fixed directory."""
     
     if not os.path.exists(f_path):
         return None, f"Error: Folder not found at {f_path}"
 
     csv_files = glob(os.path.join(f_path, "*.csv"))
-    
+
     if not csv_files:
         return None, f"Error: No CSV files found in {f_path}"
 
-    dfs = []
-    for file in csv_files:
-        df = pd.read_csv(file, parse_dates=['Date'], low_memory=False)
-        dfs.append(df)
-
+    dfs = [pd.read_csv(file, parse_dates=['Date'], low_memory=False) for file in csv_files]
     dataset = pd.concat(dfs, ignore_index=True)
 
-    # --- Data Cleaning Logic (Same as before) ---
+    # --- SAME CLEANING LOGIC AS BEFORE ---
     duplicates = dataset.duplicated().sum()
     if duplicates > 0:
         dataset = dataset.drop_duplicates()
+
     dataset['Date'] = pd.to_datetime(dataset['Date'], errors='coerce')
     median_date = dataset['Date'].median()
     dataset['Date'].fillna(median_date, inplace=True)
+    
     pollutants = ['PM2.5','PM10','NO','NO2','NOx','NH3','CO','SO2','O3','Benzene','Toluene','Xylene']
     for col in pollutants:
         median_val = dataset[col].median()
         dataset[col] = dataset[col].fillna(median_val)
+
     median_val = dataset["AQI"].median()
     dataset["AQI"] = dataset["AQI"].fillna(median_val)
+
     def assign_bucket(aqi):
         if aqi <= 50: return "Good"
         elif aqi <= 100: return "Satisfactory"
-        # ... (rest of assign_bucket function) ...
         elif aqi <= 200: return "Moderate"
         elif aqi <= 300: return "Poor"
         elif aqi <= 400: return "Very Poor"
         else: return "Severe"
-    dataset['AQI_Bucket'] = dataset.apply(lambda row: assign_bucket(row['AQI']) if pd.isna(row['AQI_Bucket']) else row['AQI_Bucket'], axis=1)
+
+    dataset['AQI_Bucket'] = dataset.apply(
+        lambda row: assign_bucket(row['AQI']) if pd.isna(row['AQI_Bucket']) else row['AQI_Bucket'],
+        axis=1
+    )
     
     return dataset, f"Data cleaned and merged successfully. Final shape: {dataset.shape}"
+
 
 # --- Display Results ---
 data_frame, status_message = load_and_clean_data_from_folder(folder_path)
