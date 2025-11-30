@@ -194,3 +194,86 @@ with st.spinner('Running Grid Search automatically... This might take a while...
 
     results_df = pd.DataFrame(grid_search.cv_results_)
     st.dataframe(results_df[['param_model__n_estimators', 'param_model__max_depth', 'mean_test_score', 'rank_test_score']])
+
+    
+
+
+st.markdown('---')
+
+
+st.subheader("Feature Importance Analysis (Top 15)")
+
+
+ohe_features = grid_search.best_estimator_.named_steps['preprocessor'] \
+    .named_transformers_['cat'].get_feature_names_out(categorical_cols)
+
+all_features = np.concatenate([ohe_features, numerical_cols])
+
+importances = grid_search.best_estimator_.named_steps['model'].feature_importances_
+imp_df = pd.DataFrame({'Feature': all_features, 'Importance': importances})
+
+top15 = imp_df.sort_values(by='Importance', ascending=False).head(15)
+
+
+fig, ax = plt.subplots(figsize=(10,6))
+sns.barplot(x=top15['Importance'], y=top15['Feature'], ax=ax)
+plt.title("Top 15 Most Important Features")
+
+st.pyplot(fig)
+st.write("""
+This chart shows the top 15 features that the Random Forest model relied on the most when predicting the AQI_Bucket. As expected, **AQI itself is the strongest predictor** because AQI_Bucket is directly derived from AQI ranges. After AQI, the next most important features are PM2.5, PM_Load, and the lag values like PM25_lag1, which capture how previous pollution levels influence current air quality.
+
+Other pollutants such as PM10, CO, NO, NO2, SO2, and O3 also contribute meaningfully, though they have lower importance compared to the top variables. The presence of 7-day averages (like PM25_7day_avg) shows that the model benefits from understanding recent pollution trends, not just individual daily values.
+
+Overall, this chart highlights that particulate matter (PM2.5 and PM10), AQI, and recent historical pollution levels are the most influential factors in determining the final air-quality category.
+""")
+
+st.markdown('---')
+
+
+
+
+st.subheader("Random Forest Prediction Confidence Distribution")
+
+rf_proba = full_pipeline.predict_proba(X_test)
+
+fig, ax = plt.subplots(figsize=(10,6))
+sns.histplot(rf_proba.max(axis=1), bins=30, kde=True, color='green', ax=ax)
+plt.title("Random Forest Prediction Confidence Distribution")
+plt.xlabel("Highest Predicted Probability")
+plt.ylabel("Count")
+
+# Use st.pyplot() instead of plt.show()
+st.pyplot(fig)
+st.write("""
+This chart shows how confident the Random Forest model is when making predictions. Each bar represents the highest probability the model assigned to its chosen AQI category for a test sample. Most of the predictions fall toward the right side of the plot, close to 1.0, which means the model is highly confident about its decisions.
+
+The smooth curve confirms that the majority of predictions have very high confidence scores.
+""")
+
+
+st.markdown('---')
+st.header("MODEL 2: LOGISTIC REGRESSION")
+
+
+logreg_pipeline = Pipeline(steps=[
+    ('preprocess', preprocessor), 
+    ('model', LogisticRegression(max_iter=3000))
+])
+
+
+with st.spinner('Training Logistic Regression model...'):
+    logreg_pipeline.fit(X_train, y_train)
+    log_preds = logreg_pipeline.predict(X_test)
+    
+   
+    st.subheader("Logistic Regression Results")
+
+    log_accuracy = accuracy_score(y_test, log_preds)
+    st.write(f"**Logistic Regression Accuracy:** **{log_accuracy:.4f}**")
+
+    st.text("Classification Report:")
+    log_report = classification_report(y_test, log_preds, output_dict=True)
+    st.dataframe(pd.DataFrame(log_report).transpose())
+
+
