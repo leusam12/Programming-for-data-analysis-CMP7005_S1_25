@@ -125,3 +125,72 @@ preprocessor = ColumnTransformer(
 
 st.success("Preprocessing pipeline defined successfully.")
 
+st.markdown('---')
+
+st.subheader("Model Training and Results")
+
+# The code runs automatically now, no 'if st.button' required
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+model = RandomForestClassifier(random_state=42)
+full_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
+                                ('model', model)])
+
+with st.spinner('Training model... this might take a moment...'):
+    full_pipeline.fit(X_train, y_train)
+    y_pred = full_pipeline.predict(X_test)
+    
+    accuracy = accuracy_score(y_test, y_pred)
+    st.success(f"Model Training Complete! Accuracy: {accuracy:.4f}")
+    
+    st.subheader("Model Evaluation Metrics")
+    
+    st.text("Classification Report:")
+    report = classification_report(y_test, y_pred, output_dict=True)
+    st.dataframe(pd.DataFrame(report).transpose())
+
+    st.text("Confusion Matrix:")
+    cm = confusion_matrix(y_test, y_pred, labels=y.unique())
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=y.unique(), yticklabels=y.unique(), ax=ax)
+    ax.set_ylabel('Actual')
+    ax.set_xlabel('Predicted')
+    st.pyplot(fig)
+
+
+
+st.markdown('---')
+
+
+
+st.subheader("Hyperparameter Tuning and Results")
+st.write("""To further optimize the model, we use a grid search to find the best parameters. The results are displayed below automatically.""")
+
+
+param_grid = {
+    'model__n_estimators': [200, 300], # Added the list of values
+    'model__max_depth': [10, 20]      # Added the list of values
+}
+
+
+grid_search = GridSearchCV(
+    full_pipeline, 
+    param_grid,
+    cv=3,
+    n_jobs=-1,
+    verbose=1
+)
+st.write("**Grid Search Configuration:**")
+st.write(grid_search) # This line generates the detailed text/visual output
+
+with st.spinner('Running Grid Search automatically... This might take a while...'):
+    grid_search.fit(X_train, y_train)
+    st.success("Grid Search Complete!")
+    st.write(f"Best parameters found: **{grid_search.best_params_}**")
+    st.write(f"Best cross-validation score: **{grid_search.best_score_:.4f}**")
+    
+    # Display the best estimator configuration (matches your requested format)
+    st.write("**Best Estimator Details:**")
+    st.write(grid_search.best_estimator_) 
+
+    results_df = pd.DataFrame(grid_search.cv_results_)
+    st.dataframe(results_df[['param_model__n_estimators', 'param_model__max_depth', 'mean_test_score', 'rank_test_score']])
