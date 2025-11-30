@@ -119,3 +119,20 @@ if city_selection:
     st.plotly_chart(fig_px, use_container_width=True)
 
 
+st.subheader(" AQI Categories")
+
+aqi_counts = df_engineered['AQI_Bucket'].value_counts().reset_index()
+
+
+aqi_counts.columns = ['AQI_Bucket', 'Count']
+
+fig_aqi = px.bar( 
+    aqi_counts,
+    x='AQI_Bucket',
+    y='Count',
+    title="Distribution of AQI Categories",
+    template="plotly_white",
+    color='AQI_Bucket'
+)
+
+st.plotly_chart(fig_aqi, use_container_width=True)
