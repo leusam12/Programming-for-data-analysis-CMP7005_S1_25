@@ -7,46 +7,74 @@ The goal of this project is to clean and analyze the dataset, create new useful 
 # Project Objectives
 
 Clean and preprocess the raw dataset.
+
 Perform Exploratory Data Analysis (EDA).
+
 Engineer new features to improve model performance.
+
 Build predictive machine learning models for AQI_Bucket.
+
 Visualize pollutant patterns and relationships.
+
 Develop a multi-page GUI using Streamlit.
+
 Use GitHub for version control and documentation.
 
 # Requirements
 
 pandas
+
 numpy
+
 matplotlib
+
 seaborn
+
 plotly
+
 streamlit
+
 scikit-learn
+
 os
+
 glob
+
 drive
 
 # Project Objectives
 Clean and preprocess the raw dataset.
+
 Perform Exploratory Data Analysis (EDA).
+
 Engineer new features to improve model performance.
+
 Build predictive machine learning models for AQI_Bucket.
+
 Visualize pollutant patterns and relationships.
+
 Develop a multi-page GUI using Streamlit.
+
 Use GitHub for version control and documentation.
 
 # Data Cleaning & Preprocessing
 The initial dataset contained:
+
 Over 29,000 rows
+
 16 pollutant and index columns
+
 Missing values in multiple features
+
 Several CSV files requiring merging
 
 # Data Cleaning Steps:
 Merged all CSV files from the dataset folder.
+
 Converted the Date column to datetime format.
+
 Removed duplicate rows.
+
 Handled missing values using:
 
 Median imputation for pollutants
@@ -149,9 +177,11 @@ These insights helped show which pollutants were most impactful and how air qual
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/a73a0573-dade-4cb2-94b2-c0a8b192fc17" />
 
 # Machine Learning Model
+
 The target variable is AQI_Bucket, a categorical classification problem.
 
 # Machine Learning Libraries Import
+
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
