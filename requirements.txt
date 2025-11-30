@@ -1,4 +1,7 @@
-Numpy
-pandas
-plotly
 streamlit
+pandas
+numpy
+plotly
+seaborn
+matplotlib
+
