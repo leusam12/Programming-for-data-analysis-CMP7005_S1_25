@@ -21,7 +21,7 @@ The heatmap shows which columns contain missing values and how they are distribu
 """)
 
 image_path_1 = os.path.join("images", "opk.png")
-image_path_2 = os.path.join("images", "Screenshot9.png")
+image_path_2 = os.path.join("images", "Screenshot.png")
 
 if os.path.exists(image_path_1):
     st.image(image_path_1, caption="Correlation heatmap", use_column_width=True)
