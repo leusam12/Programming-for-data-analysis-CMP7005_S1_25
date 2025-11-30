@@ -4,4 +4,6 @@ numpy
 plotly
 seaborn
 matplotlib
+statsmodels
+
 
