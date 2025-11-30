@@ -236,3 +236,17 @@ fig = px.line(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
+st.subheader("PM2.5 variation across cities")
+
+dataset = df_engineered.groupby('City')['PM2.5'].mean().reset_index()
+fig = px.box(
+    dataset,
+    x="City",
+    y="PM2.5",
+    title="PM2.5 Levels Across Cities",
+    template="plotly_white"
+)
+fig.update_layout(xaxis={'categoryorder': 'total descending'})
+
+st.plotly_chart(fig, use_container_width=True)
