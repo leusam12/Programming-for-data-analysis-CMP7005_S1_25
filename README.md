@@ -153,13 +153,17 @@ The target variable is AQI_Bucket, a categorical classification problem.
 
 # Machine Learning Libraries Import
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
+
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+
 from sklearn.compose import ColumnTransformer
+
 from sklearn.pipeline import Pipeline
+
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-# Models
 from sklearn.ensemble import RandomForestClassifier
+
 from sklearn.linear_model import LogisticRegression
 
 # Models Built:
