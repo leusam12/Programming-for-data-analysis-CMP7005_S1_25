@@ -1,36 +1,94 @@
 import streamlit as st
 
-st.set_page_config(page_title="Machine Learning")
+st.set_page_config(page_title="Machine Learning", layout="wide")
+
+st.sidebar.success("""This project predicts air quality (AQI and AQI categories) using multiple machine learning models. 
+It includes feature engineering, model training, evaluation, and comparison of Logistic Regression, Decision Tree, and Random Forest models.""")
 
 st.title('Data Output Prediction')
-st.write('View model predictions and metrics here.')
+st.write('Explore model predictions, evaluation metrics, and insights from different machine learning models on AQI data.')
 
-st.title("Logistic Regression Evaluation")
-
-
-
-st.write("""
-The Logistic Regression model actually did a pretty good job, reaching about 96% accuracy. It was able to correctly classify most of the AQI categories, especially the major ones like Moderate, Poor, and Satisfactory. These categories had very strong precision and recall scores.
-
-The only area where the model struggled a bit was with the Good category, where it mixed things up more often. This is not surprising because Logistic Regression is a simpler model and sometimes has trouble with complex boundaries between classes.
-
-Overall, the model still performs well and gives a solid baseline, but it’s clear that more advanced models like Random Forest and XGBoost do a better job at capturing the full patterns in the data.
-""")
-
-
-st.title("Comparison Between Random Forest and Logistic Regression")
-
-
+st.markdown('---')
+st.header("Random Forest Classifier Evaluation")
 
 st.write("""
-Both models did a solid job, but Random Forest clearly stood out. It achieved almost perfect accuracy, correctly predicting nearly every AQI category. Even the tricky categories like Very Poor and Severe were handled really well. This makes sense because Random Forest is great at picking up complex patterns in the data.
+The Random Forest model is the main classifier used to predict the AQI categories. It performed exceptionally well, achieving near-perfect accuracy on the test set. 
+Random Forest is an ensemble method that builds multiple decision trees and averages their predictions, which allows it to handle complex relationships in the data effectively.
 
-Logistic Regression also performed nicely with about 96% accuracy, but it struggled a bit more—especially with the Good category. This happens because Logistic Regression is a simpler model and doesn’t capture complicated relationships as well as Random Forest does.
-
-**In simple terms:**
-Random Forest understands the data better and gives much more accurate predictions.
-Logistic Regression is good, but not as strong for this type of problem.
+Key observations:
+- The model correctly predicted almost every AQI category, including the challenging ones like Very Poor and Severe.
+- Particulate matter (PM2.5 and PM10) and AQI itself were the most influential features, as shown in the feature importance analysis.
+- The prediction confidence distribution shows that the model is highly confident for most predictions.
+Overall, Random Forest provides a robust and reliable classification baseline for AQI categories.
 """)
 
+st.markdown('---')
+st.header("Decision Tree Classifier Evaluation")
 
+st.write("""
+The Decision Tree model was added as a simpler alternative to Random Forest. It creates a tree structure where decisions are made based on feature thresholds.
 
+Key points:
+- Decision Trees are easy to interpret and can show exactly how a prediction was made.
+- Although simpler than Random Forest, this model still performs reasonably well but may overfit on some categories.
+- The confusion matrix and classification report help visualize where the model makes correct and incorrect predictions.
+This provides a good benchmark to compare against more complex models like Random Forest.
+""")
+
+st.markdown('---')
+st.header("Logistic Regression Evaluation")
+
+st.write("""
+The Logistic Regression model serves as a baseline linear classifier. Here’s how it performed:
+
+- Achieved around 96% accuracy overall.
+- Strong performance on major AQI categories like Moderate, Poor, and Satisfactory, with high precision and recall.
+- Struggled a bit with the Good category, likely because simpler linear models can find it challenging to separate complex boundaries between classes.
+
+Overall, Logistic Regression is a strong baseline and provides a solid understanding of the data, but more advanced models like Random Forest capture the full complexity more effectively.
+""")
+
+st.markdown('---')
+st.header("Comparison: Random Forest vs Logistic Regression")
+
+st.write("""
+When comparing both models:
+
+- **Random Forest** achieved near-perfect accuracy and handled all AQI categories well, including the challenging ones like Very Poor and Severe. It captures complex patterns and interactions between features effectively.
+- **Logistic Regression** performed nicely with about 96% accuracy, but it struggled with simpler categories like Good, due to its linear nature.
+**Summary:** Random Forest provides stronger predictive power, while Logistic Regression gives a clear baseline with simpler interpretability.
+""")
+
+st.markdown('---')
+st.header("Regression Workflows for Predicting Numeric AQI")
+
+st.write("""
+In addition to classification, we also explored **regression models** to predict the numeric AQI values:
+
+1. **Univariate Linear Regression:** 
+   - Uses a single predictor to model AQI.
+   - Simple and interpretable, but limited in capturing complex relationships.
+   
+2. **Bivariate Linear Regression:**
+   - Uses two predictors for AQI prediction.
+   - Provides slightly better accuracy than univariate regression, but still struggles with multi-feature interactions.
+   
+3. **Multivariate Random Forest Regression:**
+   - Uses multiple predictors for AQI prediction.
+   - Captures complex relationships and trends in the data.
+   - Provides feature importances to understand which factors most influence AQI predictions.
+   - Achieves high accuracy and low error metrics (RMSE, MAE), making it ideal for predicting numeric AQI.
+""")
+
+st.markdown('---')
+st.header("Summary and Insights from All Models")
+
+st.write("""
+- **Random Forest (Classifier & Regressor)**: Most robust and accurate for both classification and numeric prediction.
+- **Decision Tree**: Simple and interpretable; provides insight into decision paths.
+- **Logistic Regression**: Solid baseline for classification; easy to interpret but limited for complex patterns.
+- **Linear Regression (Uni/Bivariate)**: Useful for understanding relationships between AQI and individual or paired features, but limited for multi-feature interactions.
+- **Feature Engineering** (e.g., PM2.5 & PM10 7-day averages, total VOC/Nitrogen, lag features) significantly improves model performance across all workflows.
+
+Overall, combining feature engineering with advanced models like Random Forest gives the most reliable predictions, while simpler models help with interpretability and benchmarking.
+""")
