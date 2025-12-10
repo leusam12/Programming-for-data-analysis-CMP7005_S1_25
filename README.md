@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Air Quality Analysis and AQI_Bucket Prediction Using Machine Learning
 
 This project focuses on analyzing air quality data collected from multiple Indian cities between 2015 and 2020. The dataset contains daily observations of critical air pollutants such as PM2.5, PM10, NO, NO2, NOx, CO, SO2, NH3, O3, and VOCs (Benzene, Toluene, Xylene), along with the Air Quality Index (AQI) and the categorized AQI_Bucket.
@@ -334,3 +335,7 @@ streamlit run app.py
 
 # Conclusion
 This project successfully analyzes air quality patterns, engineers meaningful features, and builds a high-performing machine learning model to predict AQI_Bucket. The Streamlit GUI provides a clean and interactive way to explore, visualize, and predict air quality levels, making the system practical for real-world environmental monitoring or educational purposes.
+=======
+# Programming-for-data-analysis-CMP7005_S1_25
+CMP7005_S1_25
+>>>>>>> 4bac1a95d784b24aebeb47081cc2556b3ef421dc
