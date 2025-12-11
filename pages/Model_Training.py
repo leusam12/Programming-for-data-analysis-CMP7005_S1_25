@@ -152,24 +152,6 @@ with st.spinner('Training model... this might take a moment...'):
     ax.set_xlabel('Predicted')
     st.pyplot(fig)
 
-
-st.markdown('---')
-st.subheader("Feature Importance Analysis (Top 15)")
-
-ohe_features = grid_search.best_estimator_.named_steps['preprocessor'] \
-    .named_transformers_['cat'].get_feature_names_out(categorical_cols)
-
-all_features = np.concatenate([ohe_features, numerical_cols])
-importances = grid_search.best_estimator_.named_steps['model'].feature_importances_
-imp_df = pd.DataFrame({'Feature': all_features, 'Importance': importances})
-top15 = imp_df.sort_values(by='Importance', ascending=False).head(15)
-
-fig, ax = plt.subplots(figsize=(10,6))
-sns.barplot(x=top15['Importance'], y=top15['Feature'], ax=ax)
-plt.title("Top 15 Most Important Features")
-st.pyplot(fig)
-st.markdown('---')
-
 st.subheader("Random Forest Prediction Confidence Distribution")
 rf_proba = full_pipeline.predict_proba(X_test)
 fig, ax = plt.subplots(figsize=(10,6))
