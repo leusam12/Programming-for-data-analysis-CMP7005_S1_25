@@ -152,34 +152,6 @@ with st.spinner('Training model... this might take a moment...'):
     ax.set_xlabel('Predicted')
     st.pyplot(fig)
 
-st.markdown('---')
-st.subheader("Hyperparameter Tuning and Results")
-
-param_grid = {
-    'model__n_estimators': [200, 300],
-    'model__max_depth': [10, 20]
-}
-
-grid_search = GridSearchCV(
-    full_pipeline, 
-    param_grid,
-    cv=3,
-    n_jobs=-1,
-    verbose=1
-)
-st.write("**Grid Search Configuration:**")
-st.write(grid_search)
-
-with st.spinner('Running Grid Search automatically...'):
-    grid_search.fit(X_train, y_train)
-    st.success("Grid Search Complete!")
-    st.write(f"Best parameters found: **{grid_search.best_params_}**")
-    st.write(f"Best cross-validation score: **{grid_search.best_score_:.4f}**")
-    st.write("**Best Estimator Details:**")
-    st.write(grid_search.best_estimator_) 
-
-    results_df = pd.DataFrame(grid_search.cv_results_)
-    st.dataframe(results_df[['param_model__n_estimators', 'param_model__max_depth', 'mean_test_score', 'rank_test_score']])
 
 st.markdown('---')
 st.subheader("Feature Importance Analysis (Top 15)")
