@@ -90,8 +90,11 @@ body {
 </div>
 """
 st.markdown(navbar, unsafe_allow_html=True)
-st.title('Model Training and Evaluation')
 
+st.markdown("<div class='custom-divider'></div>", unsafe_allow_html=True)
+
+st.markdown("<div class='card'>", unsafe_allow_html=True)
+st.title('Model Training and Evaluation')
 
 folder_path = "Assessment Data-20251028"
 
