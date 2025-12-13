@@ -84,8 +84,8 @@ body {
 <div class="topnav">
   <a href="/app">Home</a>
   <a href="/Data_Cleaning">Data Cleaning</a>
-  <a href="/Data_Visualization" class="active">Data Visualization</a>
-  <a href="/Model_Training">Model Training</a>
+  <a href="/Data_Visualization">Data Visualization</a>
+  <a href="/Model_Training" class="active">Model Training</a>
   <a href="/Post-Review">Project Review</a>
 </div>
 """
