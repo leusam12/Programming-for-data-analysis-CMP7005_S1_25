@@ -62,8 +62,8 @@ st.markdown("<div class='card'>", unsafe_allow_html=True)
 </style>
 
 <div class="topnav">
-  <a href="/app" class="active">Home</a>
-  <a href="/Data_Cleaning">Data Cleaning</a>
+  <a href="/app">Home</a>
+  <a href="/Data_Cleaning" class="active">Data Cleaning</a>
   <a href="/Data_Visualization">Data Visualization</a>
   <a href="/Model_Training">Model_Training</a>
   <a href="/Post-Review">Project Review</a>
