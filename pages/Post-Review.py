@@ -1,6 +1,82 @@
 import streamlit as st
 
-st.set_page_config(page_title="Machine Learning", layout="wide")
+st.set_page_config(page_title="Machine Learning", layout="wide")hide_sidebar = """
+<style>
+    [data-testid="stSidebar"] {display: none;}
+    [data-testid="collapsedControl"] {display: none;}
+</style>
+"""
+st.markdown(hide_sidebar, unsafe_allow_html=True)
+
+
+navbar = """
+<style>
+.topnav {
+    background-color: #1f2937;
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    margin-top:-60px;
+    margin-left: 80px;
+}
+
+.topnav a {
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 12px 25px;  
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.topnav a:hover {
+    background-color: #4b5563;
+    color: white;
+}
+
+.topnav a.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+body {
+    background-color: #f5f6fa;
+}
+
+.custom-divider {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    height: 2px;
+    background: #e962f5;
+}
+
+.card {
+    background: #e962f5;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+}
+</style>
+
+<div class="topnav">
+  <a href="/app">Home</a>
+  <a href="/Data_Cleaning">Data Cleaning</a>
+  <a href="/Data_Visualization">Data Visualization</a>
+  <a href="/Model_Training">Model Training</a>
+  <a href="/Post-Review"  class="active">Project Review</a>
+</div>
+"""
+st.markdown(navbar, unsafe_allow_html=True)
+
+st.markdown("<div class='custom-divider'></div>", unsafe_allow_html=True)
+
+st.markdown("<div class='card'>", unsafe_allow_html=True)
+
 
 st.sidebar.success("""This project predicts air quality (AQI and AQI categories) using multiple machine learning models. 
 It includes feature engineering, model training, evaluation, and comparison of Logistic Regression, Decision Tree, and Random Forest models.""")
