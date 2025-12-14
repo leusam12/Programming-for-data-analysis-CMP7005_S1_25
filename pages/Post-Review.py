@@ -1,6 +1,8 @@
 import streamlit as st
 
-st.set_page_config(page_title="Machine Learning", layout="wide")hide_sidebar = """
+st.set_page_config(page_title="Machine Learning", layout="wide")
+
+hide_sidebar = """
 <style>
     [data-testid="stSidebar"] {display: none;}
     [data-testid="collapsedControl"] {display: none;}
